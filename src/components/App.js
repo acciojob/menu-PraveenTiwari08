@@ -1,6 +1,8 @@
-import React from 'react'
-import MainMenu from './MainMenu'
-import ErrorBoundary from './ErrorBoundary'
+import React, { useState } from 'react';
+import MainMenu from './MainMenu';
+import CategoryButtons from './CategoryButtons';
+import './styles.css';
+
 
 const data = [
   {
@@ -75,17 +77,27 @@ const data = [
     img: './images/item-9.jpeg',
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
-]
-
+];
 
 function App() {
+  const [filterData, setFilterData] = useState(data);
+
+  const handleFilter = (category) => {
+    if (category === 'all') {
+      setFilterData(data);
+    } else {
+      const filtered = data.filter(item => item.category === category);
+      setFilterData(filtered);
+    }
+  };
 
   return (
-    <ErrorBoundary>
-             <MainMenu data={data}></MainMenu>
-    </ErrorBoundary>
-
-  )
+    <div>
+      <h1>Our Menu</h1>
+      <CategoryButtons handleFilter={handleFilter} />
+      <MainMenu data={filterData} />
+    </div>
+  );
 }
 
-export default App
+export default App;
