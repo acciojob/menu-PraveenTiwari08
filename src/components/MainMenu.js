@@ -3,6 +3,7 @@ import React from 'react';
 function MainMenu({ data }) {
   const menuItems = data.map((item) => (
     <div key={item.id} className="menu-item">
+      <img src={item.img} alt={item.title} />
       <div>
         <h2>{item.title}</h2>
         <p>{item.desc}</p>
